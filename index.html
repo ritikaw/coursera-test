@@ -1,0 +1,78 @@
+<!-- 
+
+Welcome to GDB Online.
+GDB online is an online compiler and debugger tool for C, C++, Python, Java, PHP, Ruby, Perl,
+C#, VB, Swift, Pascal, Fortran, Haskell, Objective-C, Assembly, HTML, CSS, JS, SQLite, Prolog.
+Code, Compile, Run and Debug online from anywhere in world.
+
+-->
+<!doctype html>
+<html lang="en" ng-app="lunchCheck">
+
+<head>
+  <title>Lunch Checker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="styles/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.9/angular.js"></script>
+  <style>
+    .message {
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" ng-controller="LunchCheckController">
+    <h1>Lunch Checker</h1>
+
+    <div class="form-group">
+      <input id="lunch-menu" type="text" placeholder="list comma separated dishes you usually have for lunch" class="form-control" ng-model="items">
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-default" ng-click="statement()">Check If Too Much</button>
+    </div>
+
+    <div class="form-group message">
+      {{ istoomuch }}
+    </div>
+  </div>
+  <script>
+    (function() {
+      'use-strict';
+
+      angular.module('lunchCheck', [])
+        .controller('LunchCheckController', function($scope) {
+          $scope.istoomuch = '';
+
+          $scope.numberitems = function() {
+            if ($scope.items) { 
+              var itemstring = $scope.items
+              var lunchItems = itemstring.split(",")
+              return lunchItems.length;
+            } else {
+              return 0;
+            }
+          };
+
+          $scope.statement = function() {
+            var totalitems = $scope.numberitems();
+            console.log(totalitems);
+            if (totalitems === 0) {
+              $scope.istoomuch = "Please enter data first!"
+            } else if (totalitems < Float64Array) {
+              $scope.istoomuch = "Enjoy!"
+            } else if (totalitems >= 4) {
+              $scope.istoomuch = "Too much!"
+            }
+          };
+
+        });
+
+    })();
+  </script>
+
+</body>
+
+</html>
